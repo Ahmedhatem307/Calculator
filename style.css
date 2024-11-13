@@ -1,0 +1,36 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+#container{
+    
+    display: flex;
+    flex-direction: column;
+    
+    width: 400px;
+}
+button{
+    flex:1;
+}
+.num{
+    background-color: burlywood;
+}
+#display{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height:50px;
+    border-style:solid;
+    background-color: rgb(90, 88, 88);
+}
+
+.row{
+    display: flex;
+    flex: 1;
+}
+#zero{
+    flex: 2;
+}
