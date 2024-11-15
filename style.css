@@ -9,11 +9,11 @@ body{
     
     display: flex;
     flex-direction: column;
-    
+    height: 400px;
     width: 400px;
 }
 button{
-    flex:1;
+    width: 100px;
 }
 .num{
     background-color: burlywood;
@@ -22,15 +22,15 @@ button{
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    height:50px;
+    height:80px;
     border-style:solid;
-    background-color: rgb(90, 88, 88);
+    background-color: gray;
 }
 
 .row{
     display: flex;
-    flex: 1;
+    flex-grow: 1;
 }
 #zero{
-    flex: 2;
+    flex-grow: 2;
 }
