@@ -24,7 +24,23 @@ function operate(first,second,operator){
     if(operator == "/")
         return divide(first,second)
 }
+let el;
 
-let firstNum;
+let display = document.getElementById("display");
+
+function addEvent(btn){
+    for (let i = 0, len = btn.length; i < len; i++) {
+        btn[i].addEventListener("click", () =>  display.textContent = btn[i].value);
+    }
+}
+let firstNum = document.querySelectorAll("button");
+addEvent(firstNum)
+
+console.log(el);
+
+console.log("hello")
 let secondNum;
 let operator;
+
+
+
