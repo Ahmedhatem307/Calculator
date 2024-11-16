@@ -1,17 +1,17 @@
 function add(firstNum,secondNum){
-    return firstNum + secondNum
+    return Number(firstNum) + Number(secondNum);
 }
 
 function subtract(firstNum,secondNum){
-    return firstNum - secondNum
+    return Number(firstNum) - Number(secondNum);
 }
 
 function multiply(firstNum,secondNum){
-    return firstNum * secondNum
+    return Number(firstNum) * Number(secondNum);
 }
 
 function divide(firstNum,secondNum){
-    return firstNum / secondNum
+    return Number(firstNum) / Number(secondNum);
 }
 
 function operate(first,second,operator){
@@ -25,50 +25,67 @@ function operate(first,second,operator){
         return divide(first,second)
 }
 
-let display = document.getElementById("display");
-display.textContent = "0";
-let firstNum = "";
-let secondNum = "";
-let operator;
-let flag = false;
+let buttons = document.querySelectorAll("button");
+let displayVal = "0";
+let firstOperand = true;
+let firstNum = "0";
+let secondNum = "0";
+let secondOperation = false;
+let operator = "";
 
-function addEvent1(btn){
-    display.textContent = "";
-    for (let i = 0, len = btn.length; i < len; i++) {
-        btn[i].addEventListener("click", () =>  {
-            display.textContent += btn[i].value;
-            
+function updateDisplay(){
+    let display = document.getElementById("display");
+    display.textContent = displayVal;
+}
+function clear(){
+    displayVal = "0";
+    firstOperand = true;
+   
+}
+
+updateDisplay()
+
+function clicks(){
+    for(let i = 0; i < buttons.length; i++){
+        buttons[i].addEventListener("click",function(){
+            if(buttons[i].classList.contains("operand")){
+                inputOperand(buttons[i].value);
+                updateDisplay();
+            }
+            else if(buttons[i].classList.contains("operator")){
+                inputOperator(buttons[i]);
+                updateDisplay()
+            }
+            else if(buttons[i].classList.contains("operation")){
+                secondNum = displayVal;
+                displayVal = operate(firstNum,secondNum,operator);
+                updateDisplay();
+            }
+            else if(buttons[i].classList.contains("clear")){
+                clear();
+                updateDisplay();
+            }
         });
+    }
+}
+
+function inputOperand(btn){
+    if(firstOperand){
+        displayVal = btn;
+        firstOperand = false;
+    }
+    else {
+        displayVal += btn;
     }
     
 }
-
-function addEvent2(btn){
-    
-    for (let i = 0, len = btn.length; i < len; i++) {
-        btn[i].addEventListener("click", () =>  {
-            btn[i].style.backgroundColor = "red";
-            firstNum = display.textContent;
-            secondClick(firstNum,btn[i].value);
-            display.textContent = "";
-        });
-    }
-    
-}
-function secondClick(first,sign){
-
-    console.log(first);
-    console.log(sign);
+function inputOperator(btn){
+    firstNum = display.textContent;
+    displayVal = btn.value;
+    firstOperand = true;
+    operator = btn.value;
+    updateDisplay();
 }
 
-let events1 = document.querySelectorAll(".operand");
-let events2 = document.querySelectorAll(".operator");
-
-addEvent1(events1);
-addEvent2(events2);
-
-
-
-
-
+clicks();
 
