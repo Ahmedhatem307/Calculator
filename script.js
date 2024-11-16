@@ -30,8 +30,8 @@ let displayVal = "0";
 let firstOperand = true;
 let firstNum = "0";
 let secondNum = "0";
-let secondOperation = false;
 let operator = "";
+let operatorsCounter = 0;
 
 function updateDisplay(){
     let display = document.getElementById("display");
@@ -40,7 +40,10 @@ function updateDisplay(){
 function clear(){
     displayVal = "0";
     firstOperand = true;
-   
+    firstNum = "0";
+    secondNum = "0";
+    operator = ""
+    operatorsCounter = 0;
 }
 
 updateDisplay()
@@ -54,7 +57,7 @@ function clicks(){
             }
             else if(buttons[i].classList.contains("operator")){
                 inputOperator(buttons[i]);
-                updateDisplay()
+                updateDisplay();
             }
             else if(buttons[i].classList.contains("operation")){
                 secondNum = displayVal;
@@ -71,20 +74,31 @@ function clicks(){
 
 function inputOperand(btn){
     if(firstOperand){
-        displayVal = btn;
+         displayVal = btn;
         firstOperand = false;
     }
     else {
-        displayVal += btn;
+         displayVal += btn;
+    }
+}
+
+function inputOperator(btn){
+    if(operatorsCounter == 0){
+        firstNum = display.textContent;
+        firstOperand = true;
+        operator = btn.value;
+        operatorsCounter++;
+    }
+    else{
+        secondNum = displayVal;
+        firstNum = operate(firstNum,secondNum,operator);
+        displayVal = firstNum;
+        firstOperand = true;
+        operator = btn.value;
+        operatorsCounter++;
     }
     
-}
-function inputOperator(btn){
-    firstNum = display.textContent;
-    displayVal = btn.value;
-    firstOperand = true;
-    operator = btn.value;
-    updateDisplay();
+    
 }
 
 clicks();
