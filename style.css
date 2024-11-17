@@ -4,18 +4,23 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: beige;
+    font-family: monospace;
 }
 #container{
     display: flex;
     flex-direction: column;
     height: 400px;
     width: 400px;
-    border: 10px;
+    border: 20px;
     border-style: solid;
-    border-color: rgb(83, 83, 83);
+    border-color: rgb(1, 1, 43);
+    border-radius: 25px;
 }
 button{
     width: 100px;
+    font-family: monospace;
+    font-size: larger;
 }
 .num{
     background-color: burlywood;
@@ -29,10 +34,21 @@ button{
     padding: 10px;
     border: 10px;
     border-style:solid;
-    background-color: gray;
+    background-color: rgb(54, 158, 13);
 }
-
 .row{
     display: flex;
     flex-grow: 1;
+}
+
+.operator, .operation{
+    background-color: rgb(58, 57, 57);
+    color: white;
+}
+
+
+
+.delete, .clear, .percentage{
+    background-color: darkblue;
+    color: white;
 }
