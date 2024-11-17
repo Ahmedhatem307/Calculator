@@ -30,10 +30,11 @@ function operate(first,second,operator){
 let buttons = document.querySelectorAll("button");
 let displayVal = "0";
 let firstOperand = true;
-let firstNum = "0";
-let secondNum = "0";
-let operator = "";
+let firstNum = null;
+let secondNum = null;
+let operator = null;
 let operatorsCounter = 0;
+let floatingPoint = false;
 
 function updateDisplay(){
     let display = document.getElementById("display");
@@ -42,10 +43,11 @@ function updateDisplay(){
 function clear(){
     displayVal = "0";
     firstOperand = true;
-    firstNum = "0";
-    secondNum = "0";
-    operator = ""
+    firstNum = null;
+    secondNum = null;
+    operator = null;
     operatorsCounter = 0;
+    floatingPoint = false;
 }
 
 updateDisplay()
@@ -66,6 +68,22 @@ function clicks(){
                 displayVal = operate(firstNum,secondNum,operator);
                 updateDisplay();
             }
+            else if(buttons[i].classList.contains("percentage")){
+                percent();
+                updateDisplay();
+            }
+            else if(buttons[i].classList.contains("invert-sign")){
+                invertSign();
+                updateDisplay();
+            }
+            else if(buttons[i].classList.contains("delete")){
+                backspace();
+                updateDisplay();
+            }
+            else if(buttons[i].classList.contains("floating-point")){
+                decimal(buttons[i].value);
+                updateDisplay();
+            }
             else if(buttons[i].classList.contains("clear")){
                 clear();
                 updateDisplay();
@@ -76,7 +94,7 @@ function clicks(){
 
 function inputOperand(btn){
     if(firstOperand){
-         displayVal = btn;
+        displayVal = btn;
         firstOperand = false;
     }
     else {
@@ -99,12 +117,34 @@ function inputOperator(btn){
         operator = btn.value;
         operatorsCounter++;
     }
-    
-    
 }
 
-function rounding(number,limit){
-    return parseFloat(Math.round(number + 'e' + limit) + 'e-' + limit);
+function backspace(){
+    if(!firstOperand && displayVal != "0"){
+        displayVal = displayVal.slice(0,-1);
+    }
+    if(displayVal.length < 1 && displayVal != "0"){
+        displayVal = "0";
+        firstOperand = true;
+    }
 }
+
+function decimal(point){
+    if(firstOperand){
+        displayVal = "0" + point;
+        firstOperand = false;
+    }
+    else{
+        displayVal += point;
+    }
+}
+
+function percent(){
+    displayVal = (Number(displayVal)/100).toString();
+}
+
+function invertSign(){
+    displayVal = (Number(displayVal)*-1).toString();
+}
+
 clicks();
-
