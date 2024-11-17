@@ -15,6 +15,8 @@ function divide(firstNum,secondNum){
 }
 
 function operate(first,second,operator){
+    if(operator == "/" && second == "0")
+        return displayVal = "ERROR!";
     if(operator == "+")
         return add(first,second)
     if(operator == "-")
@@ -101,5 +103,8 @@ function inputOperator(btn){
     
 }
 
+function rounding(number,limit){
+    return parseFloat(Math.round(number + 'e' + limit) + 'e-' + limit);
+}
 clicks();
 
