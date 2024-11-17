@@ -1,3 +1,12 @@
+let buttons = document.querySelectorAll("button");
+let displayVal = "0";
+let firstOperand = true;
+let firstNum = null;
+let secondNum = null;
+let operator = null;
+let operatorsCounter = 0;
+let floatingPoint = false;
+
 function add(firstNum,secondNum){
     return Number(firstNum) + Number(secondNum);
 }
@@ -15,6 +24,7 @@ function divide(firstNum,secondNum){
 }
 
 function operate(first,second,operator){
+    // for dividing a number by zero
     if(operator == "/" && second == "0")
         return displayVal = "ERROR!";
     if(operator == "+")
@@ -27,19 +37,11 @@ function operate(first,second,operator){
         return divide(first,second)
 }
 
-let buttons = document.querySelectorAll("button");
-let displayVal = "0";
-let firstOperand = true;
-let firstNum = null;
-let secondNum = null;
-let operator = null;
-let operatorsCounter = 0;
-let floatingPoint = false;
-
 function updateDisplay(){
     let display = document.getElementById("display");
     display.textContent = displayVal;
 }
+
 function clear(){
     displayVal = "0";
     firstOperand = true;
@@ -50,11 +52,10 @@ function clear(){
     floatingPoint = false;
 }
 
-updateDisplay()
-
 function clicks(){
     for(let i = 0; i < buttons.length; i++){
         buttons[i].addEventListener("click",function(){
+            // loop the list of buttons and add an event when clicked
             if(buttons[i].classList.contains("operand")){
                 inputOperand(buttons[i].value);
                 updateDisplay();
@@ -93,6 +94,7 @@ function clicks(){
 }
 
 function inputOperand(btn){
+    //override the first 0 then concat numbers to the new number
     if(firstOperand){
         displayVal = btn;
         firstOperand = false;
@@ -109,6 +111,7 @@ function inputOperator(btn){
         operator = btn.value;
         operatorsCounter++;
     }
+    // handles multiple operators
     else{
         secondNum = displayVal;
         firstNum = operate(firstNum,secondNum,operator);
@@ -147,4 +150,5 @@ function invertSign(){
     displayVal = (Number(displayVal)*-1).toString();
 }
 
+updateDisplay();
 clicks();
